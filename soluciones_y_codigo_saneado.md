@@ -61,7 +61,8 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 require('dotenv').config();
 
-const app = express(); // nosemgrep: javascript.express.security.audit.express-check-csurf-middleware-usage
+// nosemgrep: javascript.express.security.audit.express-check-csurf-middleware-usage
+const app = express(); 
 app.use(express.json());
 app.use(cookieParser());
 
