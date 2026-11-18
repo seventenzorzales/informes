@@ -21,20 +21,22 @@ docker ps --format '{{.Names}} {{.Image}} {{.Status}}'
 docker exec php2shell-target php -v
 ```
 
-[INSERTAR IMAGEN AQUÍ: Captura de conexión SSH]
-[INSERTAR IMAGEN AQUÍ: Captura de contenedor Docker activo]
-[INSERTAR IMAGEN AQUÍ: Captura de la versión de PHP]
+![Conexión SSH](media/php2shell_1.png)
+![Contenedor Docker](media/php2shell_2.png)
+![Versión del PHP](media/php2shell_3.png)
 
 ### 2.2 Explotación y Ejecución Remota (RCE)
 El laboratorio provee la herramienta `exploit.py`. A diferencia de fallos web tradicionales, este exploit abusa del parámetro `PHP_SESSION_UPLOAD_PROGRESS` para agotar la memoria del servidor (*bailout*) y generar un puntero colgante que evade ASLR. 
 
 Para validar la intrusión, se ejecutó el comando `id`, confirmando la ejecución de código con privilegios del usuario del servidor web (`www-data`).
 
+![Listado del exploit](media/php2shell_4.png)
+
 ```bash
 python3 exploit.py -u http://127.0.0.1:8088/index.php -c 'id'
 ```
 
-[INSERTAR IMAGEN AQUÍ: Captura de la ejecución del comando id]
+![Ejecución del comando id](media/php2shell_5.png)
 
 ### 2.3 Obtención de la Flag
 Con el acceso confirmado, se procedió a leer la flag del sistema redirigiendo la salida del comando a un archivo de prueba.
@@ -43,7 +45,7 @@ Con el acceso confirmado, se procedió a leer la flag del sistema redirigiendo l
 python3 exploit.py -u http://127.0.0.1:8088/index.php -c 'cat /f>/out/p1' --proof-file out/p1
 ```
 
-[INSERTAR IMAGEN AQUÍ: Captura de la obtención de la flag]
+![Obtención de la flag](media/php2shell_6.png)
 
 ---
 
